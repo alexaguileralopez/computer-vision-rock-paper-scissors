@@ -14,10 +14,7 @@ def get_user_choice():
     return user_choice
 
 
-def get_winner():
-
-    computer_choice = get_computer_choice()
-    user_choice = get_user_choice()
+def get_winner(computer_choice, user_choice):
 
     if computer_choice == 'Paper' and user_choice == 'Rock':
         print("You lost")
