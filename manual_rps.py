@@ -23,7 +23,7 @@ def get_winner(computer_choice, user_choice):
     elif computer_choice == 'Rock' and user_choice == 'Scissors':
         print("You lost")
     elif computer_choice == user_choice:
-        print("It's a tie!")
+        print("It is a tie!")
     else:
         print("You won!")
 
