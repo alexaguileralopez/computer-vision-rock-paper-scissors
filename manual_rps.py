@@ -29,8 +29,12 @@ def get_winner(computer_choice, user_choice):
 
     return
 
-get_winner()
+def play():
 
-    
+    get_winner(get_computer_choice(),get_user_choice())
+
+    return
+
+play()
 
 
