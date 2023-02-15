@@ -11,11 +11,6 @@ def get_computer_choice():
 def get_user_choice():
     user_choice = input('Please select your choice in Rock, Paper, Scissors')
 
-    while True:
-        if user_choice != 'Rock' or  user_choice !='Paper' or user_choice !='Scissors':
-            print('Try typing that again')
-        else:
-            break
     return user_choice
 
 
