@@ -1,3 +1,4 @@
+import time
 import cv2
 from keras.models import load_model
 import numpy as np
@@ -28,4 +29,9 @@ def get_prediction(model,cap,data):
 
     return prediction
 
+
+
 get_prediction(model, cap, data)
+time.time()
+
+
