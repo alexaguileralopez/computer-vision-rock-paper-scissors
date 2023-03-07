@@ -10,8 +10,15 @@ import numpy as np
 timer = int(5)
    
 model = load_model('keras_model.h5')
+
 cap = cv2.VideoCapture(0)
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+
+# defining the variables used to count 
+# victories and rounds
+rounds_played = 0
+computer_wins = 0
+user_wins=0
 
 
 
@@ -39,53 +46,53 @@ def get_computer_choice():
     return computer_choice
 
 # function to define who is the winner
+# the fxn returns 1 when computer wins
+# returns 0 when user wins 
+# returns 2 when it is a tie
 
 def get_winner(computer_choice, user_choice):
 
-    global computer_wins
-    computer_wins = 0
-    global user_wins
-    user_wins = 0
-
+    
     if computer_choice == 'Paper' and user_choice == 'Rock':
-        print("You lost")
-        computer_wins = computer_wins + 1
+        return 1
     elif computer_choice == 'Scissors' and user_choice == 'Paper' :
-        print("You lost")
-        computer_wins = computer_wins + 1
+        return 1
     elif computer_choice == 'Rock' and user_choice == 'Scissors':
-        print("You lost")
-        computer_wins = computer_wins + 1
+        return 1
     elif computer_choice == user_choice:
-        print("It is a tie!")
-        
+        return 2
     else:
-        print("You won!")
-        user_wins = user_wins + 1
+        return 0
 
-    return computer_wins, user_wins
+    
+
+def define_winner(computer_wins, user_wins):
+    if computer_wins > user_wins:
+        return "Computer!"
+    elif computer_wins < user_wins:
+        return "User!"
 
 
 start = time.time()
+    
+while rounds_played < 5 or computer_wins or user_wins < 3:
 
-while True:
-      
     # Read and display each frame
     ret, frame = cap.read()
     cv2.imshow('frame', frame)
-  
+
     # check for the key pressed
     k = cv2.waitKey(125)
-  
+        
     # set the key for the countdown
     # to begin. Here we set q
     # if key pressed is q
     if k == ord('q'):
         prev = time.time()
-  
+
         while timer >= 0:
             ret, frame = cap.read()
-  
+
             # Display countdown on each frame
             # specify the font and draw the
             # countdown using puttext
@@ -96,10 +103,10 @@ while True:
                         4, cv2.LINE_AA)
             cv2.imshow('frame', frame)
             cv2.waitKey(125)
-  
+
             # current time
             cur = time.time()
-  
+
             # Update and keep track of Countdown
             # if time elapsed is one second 
             # then decrease the counter
@@ -110,7 +117,7 @@ while True:
         # when countdown is finished, apply the model to the frame
         else:
             ret, frame = cap.read()
-  
+
             # apply the model to that frame that we captured
 
             ret, frame = cap.read()
@@ -121,34 +128,49 @@ while True:
             prediction = model.predict(data)
             cv2.imshow('frame', frame)
             cv2.waitKey(2000)
-            # HERE we can reset the Countdown timer
-            # if we want more Capture without closing
-            # the camera
+
 
             user_choice = get_prediction(prediction)
             print("You chose", user_choice)
-  
-    # Press Esc to exit
-    elif k == 27:
+
+            computer_choice = get_computer_choice()
+            get_winner(computer_choice,user_choice)
+
+            if get_winner(computer_choice,user_choice)== 1:
+                computer_wins = computer_wins +1
+                print ("You lost!")
+            elif get_winner(computer_choice,user_choice)== 0:
+                user_wins = user_wins +1
+                print("You won!")
+            else:
+                print("It is a tie!")
+
+            print("Computer wins: ", computer_wins, "\nUser wins: ", user_wins)
+
+            # the rounds played adds 1, and 
+            # the timer is reseted
+            rounds_played = rounds_played +1
+            timer = int(5)
+
+    # Press Esc to exit or play 5 rounds
+    elif k == 27 or rounds_played ==5:
         break
-  
+    
+
 # close the camera
 cap.release()
-   
+
 # close all the opened windows
 cv2.destroyAllWindows()
 
 end = time.time()
 
+if computer_wins != user_wins:
+    print("GAME OVER, the winner is the ", define_winner(computer_wins, user_wins))
+elif computer_wins == user_wins:
+    print("GAME OVER, IT IS A TIE!")
 
-print("The time elapsed is", end-start)
+print("The time elapsed was", end-start)
 
-computer_choice = get_computer_choice()
-get_winner(computer_choice,user_choice)
-
-#redefine computer wins and user wins from local to global variables
-
-
-print("Computer wins: ", computer_wins, "\nUser wins: ", user_wins)
 
 
