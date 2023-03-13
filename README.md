@@ -26,3 +26,9 @@ Therefore, the syntax looks like this:
 get_winner(get_computer_choice(),get_user_choice())
 
 Hence, this last function, calls "get_winner", which calls "get_computer_choice" and "get_user_choice".
+
+
+# Milestone 5
+In this last milestone, the game was taken to a next step, and the camera was used to replace the choice of the user, and the computer's choice was mantained as earlier. 
+In this exercise, several libraries are imported in order to make use of the model, camera and others. 
+The model is imported from a downloaded file where computer vision model was created by classifying different photographs of the user showing 'rock', 'paper', 'scissors' and nothing to the camera. The model receives the input from the camera and returns the values of the probabilities that the image pertains to each of the 4 classes. 

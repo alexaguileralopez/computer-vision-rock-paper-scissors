@@ -8,6 +8,7 @@ import numpy as np
 # for simplicity we set it to 3
 # We can also take this as input
 timer = int(5)
+text = 'Press Q to start countdown'
    
 model = load_model('keras_model.h5')
 
@@ -64,7 +65,7 @@ def get_winner(computer_choice, user_choice):
     else:
         return 0
 
-    
+# function that defines the winner by comparing the variables computer_wins and user_wins    
 
 def define_winner(computer_wins, user_wins):
     if computer_wins > user_wins:
@@ -74,13 +75,22 @@ def define_winner(computer_wins, user_wins):
 
 
 start = time.time()
-    
+
+# loop that is mantained while 5 rounds have been played or computer or user have won (3 victories)    
 while rounds_played < 5 or computer_wins or user_wins < 3:
 
     # Read and display each frame
     ret, frame = cap.read()
     cv2.imshow('frame', frame)
 
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    cv2.putText(frame, str(text), 
+            (100, 100), font,
+            2, (0, 255, 255),
+            4, cv2.LINE_AA)
+    cv2.imshow('frame', frame)
+    
+    
     # check for the key pressed
     k = cv2.waitKey(125)
         

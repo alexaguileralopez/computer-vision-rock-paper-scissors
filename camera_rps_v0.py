@@ -13,6 +13,8 @@ user_wins = 0
 #starting the time
 start = time.time()
 
+# this function returns the prediction of the model, 
+# by taking the argmax of the array that the model returns
 def get_prediction(prediction):
     choice = ''
     max = np.argmax(prediction)
@@ -27,12 +29,15 @@ def get_prediction(prediction):
 
     return choice
 
+# this function returns a random choice between R, P, S
 def get_computer_choice():
     hand = ['Rock', 'Paper', 'Scissors']
     computer_choice = random.choice(hand)
     
     return computer_choice
 
+# this function defines who is the winner, 
+# by comparing the computer choice and the user choice
 def get_winner(computer_choice, user_choice):
 
     winner = ''
@@ -56,10 +61,9 @@ def get_winner(computer_choice, user_choice):
     return winner
 
 
-        
-
-
-
+# this loop uses the Open-CV library to capture the image, and
+# it normalizes it. It stores that image as the variable data, which is passed to the model
+# model.predict(data)
 while True: 
     start = time.time()
 
