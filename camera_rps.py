@@ -23,7 +23,7 @@ class RPS():
         
         return computer_choice
 
-    def get_user_choice(self):
+    def get_prediction(self):
 
         text = 'PRESS Q TO START'
         timer = 5
@@ -88,7 +88,7 @@ class RPS():
         while True:
 
             computer_choice = self.get_computer_choice()
-            user_choice = self.get_user_choice()
+            user_choice = self.get_prediction()
 
             print("You chose: ", user_choice)
 
