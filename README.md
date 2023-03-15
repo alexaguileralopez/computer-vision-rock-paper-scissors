@@ -37,7 +37,11 @@ The final approach was to use OOP to create the game instance.
 A class called RPS (Roc Paper Scissors) is defined with various attributes such as the model, the videocamera, data and labels.
 The first method defined is the "get_computer_choice", which is the same function used in previous milestones. 
 However, the method get_prediction, makes use of the camera to get the image from the user and applying the model. 
-Text is displayed when the camera is switched on "PRESS Q TO START". When the user presses the key 'q', the countdown from 5 is displayed, and the image is captured, normalized, and inputted to the model, which makes the prediction. Finally, the method returns the user_choice, which is defined by getting the array of predictions, and applying self.labels[np.argmax(prediction)], which only highlights the value in 'labels' that is the highest, therefore, assigns the right label to the user choice. 
+Text is displayed when the camera is switched on "PRESS Q TO START". 
+
+![My Image](Captura de pantalla 2023-03-15 a las 11.41.57.png)
+
+When the user presses the key 'q', the countdown from 5 is displayed, and the image is captured, normalized, and inputted to the model, which makes the prediction. Finally, the method returns the user_choice, which is defined by getting the array of predictions, and applying self.labels[np.argmax(prediction)], which only highlights the value in 'labels' that is the highest, therefore, assigns the right label to the user choice. 
 
 The method get_winner makes use of the previously mentioned methods, and defines the winner by adding points to the computer or the user according to the rules of the game. 
 Finally, when either computer or user have reached 3 victories, or the game has arrived to 5 rounds, the method stops counting points, and compares the score to give a final winner.
