@@ -39,7 +39,7 @@ The first method defined is the "get_computer_choice", which is the same functio
 However, the method get_prediction, makes use of the camera to get the image from the user and applying the model. 
 Text is displayed when the camera is switched on "PRESS Q TO START". 
 
-![Image text] /Users/alexaguilera/Desktop/AiCore/computer-vision-rock-paper-scissors/RPS_Countdown.jpg
+![Image text] (https://github.com/alexaguileralopez/computer-vision-rock-paper-scissors/blob/main/RPS_Countdown.jpg)
 
 When the user presses the key 'q', the countdown from 5 is displayed, and the image is captured, normalized, and inputted to the model, which makes the prediction. Finally, the method returns the user_choice, which is defined by getting the array of predictions, and applying self.labels[np.argmax(prediction)], which only highlights the value in 'labels' that is the highest, therefore, assigns the right label to the user choice. 
 
